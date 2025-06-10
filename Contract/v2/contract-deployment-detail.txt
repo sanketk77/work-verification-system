@@ -1,0 +1,43 @@
+
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x8ab8d5b852c385b8c03b92f99df2fadb864a73845f131438d174fb574cfb8255
+block hash	0xda9f9f525cdcf98f6a52308f4500a11426bb2845e2084d30bbb7344df7ae42d2
+block number	8518801
+contract address	0xdde656554209c49a427465711f53c6a5b7e42270
+from	0x9594a65303ea318d8EfaE4EafbC94a03c1D93B31
+to	WorkExperienceSBT.(constructor)
+gas	2653004 gas
+transaction cost	2630956 gas 
+input	0x608...a0033
+decoded input	{}
+decoded output	 - 
+logs	[
+	{
+		"from": "0xdde656554209c49a427465711f53c6a5b7e42270",
+		"topic": "0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d",
+		"event": "RoleGranted",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000000000000000000000000000",
+			"1": "0x9594a65303ea318d8EfaE4EafbC94a03c1D93B31",
+			"2": "0x9594a65303ea318d8EfaE4EafbC94a03c1D93B31"
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0xdde656554209c49a427465711f53c6a5b7e42270",
+    "blockHash": "0xda9f9f525cdcf98f6a52308f4500a11426bb2845e2084d30bbb7344df7ae42d2",
+    "blockNumber": "0x81fc91",
+    "data": "0x",
+    "logIndex": "0x10",
+    "removed": false,
+    "topics": [
+      "0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d",
+      "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "0x0000000000000000000000009594a65303ea318d8efae4eafbc94a03c1d93b31",
+      "0x0000000000000000000000009594a65303ea318d8efae4eafbc94a03c1d93b31"
+    ],
+    "transactionHash": "0x8ab8d5b852c385b8c03b92f99df2fadb864a73845f131438d174fb574cfb8255",
+    "transactionIndex": "0x16"
+  }
+]
