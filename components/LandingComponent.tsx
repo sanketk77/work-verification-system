@@ -354,7 +354,7 @@ const LandingComponent = () => {
               <a href="#" className="hover:text-white transition-colors">
                 Terms
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="/docs" className="hover:text-white transition-colors">
                 Docs
               </a>
             </div>
