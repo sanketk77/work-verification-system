@@ -11,11 +11,11 @@ import { useWallet } from "./WalletContext"; // Adjust import path as needed
 import { CONTRACT_ABI_V2 } from "../Contract/v2/ABI";
 import { isAddress } from "ethers";
 import type { EventLog } from "ethers";
+import { CONTRACT_ADDRESS } from "@/utils/constants";
 
 // Contract ABI - Complete ABI from your contract
 const CONTRACT_ABI = CONTRACT_ABI_V2;
 // Replace with your deployed contract address
-const CONTRACT_ADDRESS = "0xdde656554209c49a427465711f53c6a5b7e42270";
 
 export enum SupervisorStatus {
   NONE = "none",

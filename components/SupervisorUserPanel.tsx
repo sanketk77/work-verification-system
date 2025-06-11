@@ -14,10 +14,9 @@ interface InternshipData {
   issuedOn: string;
 }
 
-const UserPanel = () => {
+const SupervisorUserPanel = () => {
   const { account } = useWallet();
   const {
-    isAdmin,
     isSupervisor,
     requestSupervisorRole,
     isRequestingRole,
@@ -373,4 +372,4 @@ const UserPanel = () => {
   );
 };
 
-export default UserPanel;
+export default SupervisorUserPanel;

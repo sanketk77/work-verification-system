@@ -30,7 +30,7 @@ const AdminUserPanel: React.FC = () => {
     return (
       <div className="bg-red-50 border border-red-200 rounded-lg p-4">
         <p className="text-red-800">
-          You don't have admin privileges to view supervisor requests.
+          You don&apos;t have admin privileges to view supervisor requests.
         </p>
       </div>
     );

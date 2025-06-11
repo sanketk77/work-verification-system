@@ -30,11 +30,21 @@ export async function POST(req: NextRequest) {
       ipfsURI: `ipfs://${result.data.IpfsHash}`,
       gatewayURL: `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${result.data.IpfsHash}`,
     });
-  } catch (error: any) {
-    console.error(
-      "Error uploading to IPFS:",
-      error?.response?.data || error.message
-    );
+  } catch (error: unknown) {
+    // First check if it's an AxiosError
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error uploading to IPFS:",
+        error.response?.data ?? error.message
+      );
+    } else if (error instanceof Error) {
+      // Some other Error
+      console.error("Error uploading to IPFS:", error.message);
+    } else {
+      // Non-Error thrown
+      console.error("Unexpected error uploading to IPFS:", error);
+    }
+
     return NextResponse.json(
       { error: "Failed to upload to IPFS" },
       { status: 500 }
