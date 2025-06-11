@@ -9,6 +9,8 @@ import React, {
 import { ethers } from "ethers";
 import { useWallet } from "./WalletContext"; // Adjust import path as needed
 import { CONTRACT_ABI_V2 } from "../Contract/v2/ABI";
+import { isAddress } from "ethers";
+import type { EventLog } from "ethers";
 
 // Contract ABI - Complete ABI from your contract
 const CONTRACT_ABI = CONTRACT_ABI_V2;
@@ -281,51 +283,46 @@ export function SBTProvider({ children }: SBTProviderProps) {
 
     setIsLoadingRequests(true);
     try {
-      // Get all SupervisorRoleRequested events from contract deployment
+      // Get SupervisorRoleRequested events
       const requestFilter = contract.filters.SupervisorRoleRequested();
       const requestEvents = await contract.queryFilter(requestFilter);
 
-      // Get all SupervisorGranted events to determine which requests are still pending
+      // Get SupervisorGranted events
       const grantedFilter = contract.filters.SupervisorGranted();
       const grantedEvents = await contract.queryFilter(grantedFilter);
 
-      // Create set of addresses that have been granted supervisor role
+      // Track addresses that have been granted supervisor role
       const grantedAddresses = new Set(
         grantedEvents
-          .filter((event) => event.args && event.args[0])
-          .map((event) => event.args![0].toLowerCase())
+          .filter((event): event is EventLog => "args" in event && !!event.args)
+          .map((event) => event.args[0].toLowerCase())
       );
 
-      // Process request events
       const requests: SupervisorRequest[] = [];
       const pendingRequests: SupervisorRequest[] = [];
 
       for (const event of requestEvents) {
-        if (!event.args) {
-          continue;
-        }
+        if (!("args" in event) || !event.args) continue;
+
         const requesterAddress = event.args[0];
         const block = await event.getBlock();
 
-        // Check if this address still has a pending request
+        // Check contract mapping for pending status
         const isPending = await contract.supervisorRequests(requesterAddress);
 
         const request: SupervisorRequest = {
           address: requesterAddress,
-          timestamp: block.timestamp * 1000, // Convert to milliseconds
+          timestamp: block.timestamp * 1000, // convert to ms
           blockNumber: event.blockNumber,
           transactionHash: event.transactionHash,
-          isPending: isPending,
+          isPending,
         };
 
         requests.push(request);
-
-        if (isPending) {
-          pendingRequests.push(request);
-        }
+        if (isPending) pendingRequests.push(request);
       }
 
-      // Sort by timestamp (newest first)
+      // Sort descending by timestamp
       requests.sort((a, b) => b.timestamp - a.timestamp);
       pendingRequests.sort((a, b) => b.timestamp - a.timestamp);
 
@@ -394,7 +391,7 @@ export function SBTProvider({ children }: SBTProviderProps) {
       return;
     }
 
-    if (!ethers.utils.isAddress(internAddress)) {
+    if (!isAddress(internAddress)) {
       setError("Invalid intern address");
       return;
     }
@@ -496,7 +493,7 @@ export function SBTProvider({ children }: SBTProviderProps) {
       return;
     }
 
-    if (!ethers.utils.isAddress(requestAddress)) {
+    if (!isAddress(requestAddress)) {
       setError("Invalid address");
       return;
     }

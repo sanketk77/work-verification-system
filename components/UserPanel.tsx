@@ -1,5 +1,6 @@
 import { useSBT } from "@/context/SBTcontext";
 import { useWallet } from "@/context/WalletContext";
+import { isAddress } from "ethers";
 import React, { useState } from "react";
 
 interface InternshipData {
@@ -82,22 +83,40 @@ const UserPanel = () => {
     }
 
     try {
-      // Create metadata object
+      // Step 1: Validate address
+      if (!isAddress(internshipData.intern)) {
+        alert("Invalid intern wallet address");
+        return;
+      }
+
+      // Step 2: Create metadata object
       const metadata = {
         ...internshipData,
         supervisor: account,
         issuedOn: new Date().toISOString(),
       };
 
-      // Convert metadata to JSON string for URI
-      // In a real application, you would typically upload this to IPFS
-      // For now, we'll create a data URI or you can modify this to upload to your preferred storage
-      const metadataString = JSON.stringify(metadata, null, 2);
-      const uri = `data:application/json;base64,${btoa(metadataString)}`;
+      // Step 3: Upload metadata to IPFS via your API
+      const uploadRes = await fetch("/api/upload-to-ipfs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(metadata),
+      });
 
-      await mintExperience(internshipData.intern, uri);
+      const uploadData = await uploadRes.json();
 
-      // Reset form on successful mint
+      if (!uploadRes.ok || !uploadData.ipfsURI) {
+        console.error("IPFS upload failed:", uploadData);
+        alert("Failed to upload metadata to IPFS.");
+        return;
+      }
+
+      // Step 4: Use IPFS URI for minting
+      await mintExperience(internshipData.intern, uploadData.ipfsURI);
+
+      // Step 5: Reset state after success
       setInternshipData({
         name: "Internship Certificate",
         description: "",
@@ -108,10 +127,12 @@ const UserPanel = () => {
         verificationUrl: "",
         issuedOn: new Date().toISOString(),
       });
+
       setShowMintForm(false);
       alert("SBT minted successfully!");
     } catch (error) {
       console.error("Failed to mint SBT:", error);
+      alert("Minting failed. Check console for details.");
     }
   };
 
