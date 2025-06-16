@@ -2,11 +2,29 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAddress } from "ethers";
 import axios from "axios";
 
-export async function POST(req: NextRequest) {
-  const metadata = await req.json();
-  const internAddress = metadata?.intern;
+interface InternshipMetadata {
+  certificateTitle: string;
+  internName: string;
+  internEmail: string;
+  internWalletAddress: string;
+  companyName: string;
+  department: string;
+  mentorName: string;
+  duration: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  skills: string[];
+  verificationUrl: string;
+  issuedOn: string;
+  supervisor: string;
+}
 
-  if (!internAddress || !isAddress(internAddress)) {
+export async function POST(req: NextRequest) {
+  const metadata: InternshipMetadata = await req.json();
+
+  const wallet = metadata?.internWalletAddress;
+  if (!wallet || !isAddress(wallet)) {
     return NextResponse.json(
       { error: "Invalid or missing wallet address." },
       { status: 400 }
@@ -31,17 +49,14 @@ export async function POST(req: NextRequest) {
       gatewayURL: `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${result.data.IpfsHash}`,
     });
   } catch (error: unknown) {
-    // First check if it's an AxiosError
     if (axios.isAxiosError(error)) {
       console.error(
         "Error uploading to IPFS:",
         error.response?.data ?? error.message
       );
     } else if (error instanceof Error) {
-      // Some other Error
       console.error("Error uploading to IPFS:", error.message);
     } else {
-      // Non-Error thrown
       console.error("Unexpected error uploading to IPFS:", error);
     }
 

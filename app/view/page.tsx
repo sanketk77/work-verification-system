@@ -10,13 +10,19 @@ interface Certificate {
   tokenId: string;
   name: string;
   company: string;
-  duration: string;
-  description: string;
-  skills: string[];
-  issuedOn: string;
+  duration?: string;
+  description?: string;
+  skills?: string[];
+  issuedOn?: string;
   verificationUrl?: string;
   supervisor?: string;
   intern?: string;
+  internName?: string;
+  internEmail?: string;
+  department?: string;
+  mentorName?: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 const VerifyPage = () => {
@@ -83,7 +89,7 @@ const VerifyPage = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
-    if (error) clearError(); // Clear error when user starts typing
+    if (error) clearError();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -101,7 +107,6 @@ const VerifyPage = () => {
           associated with it.
         </p>
 
-        {/* Input Section */}
         <div className="bg-gray-50 p-6 rounded-lg mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Wallet Address *
@@ -125,7 +130,6 @@ const VerifyPage = () => {
           </div>
         </div>
 
-        {/* Error Display */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
             <div className="flex justify-between items-center">
@@ -140,7 +144,6 @@ const VerifyPage = () => {
           </div>
         )}
 
-        {/* Results Section */}
         {certificates.length > 0 && (
           <div className="border-t pt-6">
             <div className="flex justify-between items-center mb-6">
@@ -159,7 +162,6 @@ const VerifyPage = () => {
                   key={idx}
                   className="bg-gray-50 p-6 rounded-lg border border-gray-200"
                 >
-                  {/* Certificate Header */}
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">
@@ -169,38 +171,71 @@ const VerifyPage = () => {
                         Token ID: #{cert.tokenId}
                       </p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-gray-700">
-                        Issued On
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        {new Date(cert.issuedOn).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </p>
-                    </div>
+                    {cert.issuedOn && (
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-700">
+                          Issued On
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          {new Date(cert.issuedOn).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Certificate Details Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <h4 className="font-medium text-gray-700 mb-1">
-                        Company
-                      </h4>
-                      <p className="text-gray-600">{cert.company}</p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-medium text-gray-700 mb-1">
-                        Duration
-                      </h4>
-                      <p className="text-gray-600">
-                        {cert.duration || "Not specified"}
-                      </p>
-                    </div>
-
+                    {cert.company && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Company
+                        </h4>
+                        <p className="text-gray-600">{cert.company}</p>
+                      </div>
+                    )}
+                    {cert.duration && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Duration
+                        </h4>
+                        <p className="text-gray-600">{cert.duration}</p>
+                      </div>
+                    )}
+                    {cert.internName && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Intern Name
+                        </h4>
+                        <p className="text-gray-600">{cert.internName}</p>
+                      </div>
+                    )}
+                    {cert.internEmail && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Intern Email
+                        </h4>
+                        <p className="text-gray-600">{cert.internEmail}</p>
+                      </div>
+                    )}
+                    {cert.department && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Department
+                        </h4>
+                        <p className="text-gray-600">{cert.department}</p>
+                      </div>
+                    )}
+                    {cert.mentorName && (
+                      <div>
+                        <h4 className="font-medium text-gray-700 mb-1">
+                          Mentor
+                        </h4>
+                        <p className="text-gray-600">{cert.mentorName}</p>
+                      </div>
+                    )}
                     {cert.supervisor && (
                       <div className="md:col-span-2">
                         <h4 className="font-medium text-gray-700 mb-1">
@@ -213,17 +248,17 @@ const VerifyPage = () => {
                     )}
                   </div>
 
-                  {/* Description */}
-                  <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-2">
-                      Description
-                    </h4>
-                    <p className="text-gray-600 leading-relaxed">
-                      {cert.description}
-                    </p>
-                  </div>
+                  {cert.description && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-gray-700 mb-2">
+                        Description
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        {cert.description}
+                      </p>
+                    </div>
+                  )}
 
-                  {/* Skills */}
                   {cert.skills && cert.skills.length > 0 && (
                     <div className="mb-4">
                       <h4 className="font-medium text-gray-700 mb-2">
@@ -242,7 +277,6 @@ const VerifyPage = () => {
                     </div>
                   )}
 
-                  {/* Verification URL */}
                   {cert.verificationUrl && (
                     <div className="pt-4 border-t border-gray-200">
                       <a
@@ -262,7 +296,6 @@ const VerifyPage = () => {
           </div>
         )}
 
-        {/* Empty State when no results and no error */}
         {!loading && !error && certificates.length === 0 && address && (
           <div className="text-center py-12 bg-gray-50 rounded-lg">
             <div className="text-gray-400 text-4xl mb-4">📜</div>
