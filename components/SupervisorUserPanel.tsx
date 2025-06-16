@@ -64,6 +64,11 @@ const SupervisorMintSBTForm = () => {
     setInternshipData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const getFieldValue = (key: keyof InternshipData): string => {
+    const value = internshipData[key];
+    return typeof value === "string" ? value : "";
+  };
+
   const addSkill = () => {
     const skill = skillInput.trim();
     if (skill && !internshipData.skills.includes(skill)) {
@@ -208,9 +213,9 @@ const SupervisorMintSBTForm = () => {
                     {label}
                   </label>
                   <input
-                    type={field.includes("Date") ? "date" : "text"}
+                    type={(field as string).includes("Date") ? "date" : "text"}
                     name={field}
-                    value={(internshipData as any)[field] || ""}
+                    value={getFieldValue(field as keyof InternshipData)}
                     onChange={handleInputChange}
                     className="w-full p-2 border rounded"
                   />
