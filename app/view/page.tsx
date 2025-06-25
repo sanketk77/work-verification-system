@@ -98,6 +98,10 @@ const VerifyPage = () => {
     }
   };
 
+  const getEtherscanTokenUrl = (tokenId: string) => {
+    return `https://sepolia.etherscan.io/token/${CONTRACT_ADDRESS}?a=${tokenId}`;
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <div className="mb-6">
@@ -277,19 +281,30 @@ const VerifyPage = () => {
                     </div>
                   )}
 
-                  {cert.verificationUrl && (
-                    <div className="pt-4 border-t border-gray-200">
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="flex flex-wrap gap-3">
+                      {cert.verificationUrl && (
+                        <a
+                          href={cert.verificationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors text-sm font-medium"
+                        >
+                          <span>🔗</span>
+                          View Verification Details
+                        </a>
+                      )}
                       <a
-                        href={cert.verificationUrl}
+                        href={getEtherscanTokenUrl(cert.tokenId)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors text-sm font-medium"
+                        className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors text-sm font-medium"
                       >
-                        <span>🔗</span>
-                        View Verification Details
+                        <span>🔍</span>
+                        View on Etherscan
                       </a>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
