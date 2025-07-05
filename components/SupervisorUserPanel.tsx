@@ -193,12 +193,20 @@ const SupervisorMintSBTForm = () => {
         <div className="border-t pt-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Mint Internship SBT</h2>
-            <button
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors"
-              onClick={() => setShowMintForm(!showMintForm)}
-            >
-              {showMintForm ? "Cancel" : "Mint New SBT"}
-            </button>
+            <div className="flex gap-x-4">
+              <Link
+                href="/view"
+                className="inline-flex items-center px-4 py-2 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+              >
+                View Internship SBTs
+              </Link>
+              <button
+                className="bg-green-500 hover:cursor-pointer hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors"
+                onClick={() => setShowMintForm(!showMintForm)}
+              >
+                {showMintForm ? "Cancel" : "Mint New SBT"}
+              </button>
+            </div>
           </div>
 
           {showMintForm && (

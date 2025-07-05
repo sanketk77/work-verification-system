@@ -14,6 +14,7 @@ import {
 import { useLenis } from "../hooks/useLenis";
 import { useScrollAnimations } from "@/hooks/useScrollAnimation";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const LandingComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -369,24 +370,12 @@ const LandingComponent = () => {
             </div>
 
             <div className="flex items-center space-x-6 text-sm text-gray-400">
-              <a
-                href="#"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Privacy
-              </a>
-              <a
-                href="#"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Terms
-              </a>
-              <a
-                href="#"
+              <Link
+                href="/docs"
                 className="hover:text-white transition-colors duration-300"
               >
                 Docs
-              </a>
+              </Link>
             </div>
           </div>
 
