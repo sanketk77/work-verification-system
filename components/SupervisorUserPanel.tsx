@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useWallet } from "@/context/WalletContext";
 import { useSBT } from "@/context/SBTcontext";
 import { isAddress } from "ethers";
+import Link from "next/link";
 
 interface InternshipData {
   certificateTitle: string;
@@ -145,7 +146,7 @@ const SupervisorMintSBTForm = () => {
       </div>
 
       {!canMint && (
-        <div className="mb-6">
+        <div className="mb-6 flex gap-x-4">
           <button
             className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded transition-colors"
             onClick={requestSupervisorRole}
@@ -164,6 +165,13 @@ const SupervisorMintSBTForm = () => {
               administrator.
             </p>
           )}
+
+          <Link
+            href="/view"
+            className="inline-flex items-center px-4 py-2 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+          >
+            View Internship SBTs
+          </Link>
         </div>
       )}
 
