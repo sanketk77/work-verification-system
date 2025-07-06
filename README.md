@@ -31,7 +31,7 @@ A decentralized platform to verify internship, training, or work credentials usi
 
 ## 📸 Screenshots
 
-| Dashboard                         | Certificate View                    |
+| Dashboard                      
 |-----------------------------------|-------------------------------------|
 | ![Dashboard](![Screenshot (4170)](https://github.com/user-attachments/assets/45712ba0-d35f-45e2-ab75-7d1de6ed4321)![Screenshot (4174)](https://github.com/user-attachments/assets/9f3199d0-3ecc-403c-b340-cab9fbc72cba)
 
