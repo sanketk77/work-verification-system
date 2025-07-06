@@ -33,9 +33,9 @@ A decentralized platform to verify internship, training, or work credentials usi
 
 | Dashboard                      
 |-----------------------------------|-------------------------------------|
-| ![Dashboard](![Screenshot (4170)](https://github.com/user-attachments/assets/45712ba0-d35f-45e2-ab75-7d1de6ed4321)![Screenshot (4174)](https://github.com/user-attachments/assets/9f3199d0-3ecc-403c-b340-cab9fbc72cba)
+| ([Screenshot (4170)](https://github.com/user-attachments/assets/45712ba0-d35f-45e2-ab75-7d1de6ed4321)![Screenshot (4174)](https://github.com/user-attachments/assets/9f3199d0-3ecc-403c-b340-cab9fbc72cba)
 
- | ![Certificate](![Screenshot (4173)](https://github.com/user-attachments/assets/c3f7a4c0-8f65-46f9-9120-ddc7de27c8a5)![Screenshot (4175)](https://github.com/user-attachments/assets/15f537d2-0905-447f-9ab3-7641f7f836b0)
+ | ([Screenshot (4173)](https://github.com/user-attachments/assets/c3f7a4c0-8f65-46f9-9120-ddc7de27c8a5)![Screenshot (4175)](https://github.com/user-attachments/assets/15f537d2-0905-447f-9ab3-7641f7f836b0)
 
  |
 
