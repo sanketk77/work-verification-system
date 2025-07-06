@@ -1,9 +1,6 @@
 # 🛡️ Work Verification System – CertiSBT
 
 A decentralized platform to verify internship, training, or work credentials using **Soulbound Tokens (SBTs)** on the Ethereum blockchain.
-
-![Project Banner](https://user-images.githubusercontent.com/0000000/0000000/banner.png) <!-- You can upload a banner image to GitHub and replace this link -->
-
 ---
 
 ## 🔗 Live Demo
