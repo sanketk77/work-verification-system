@@ -44,10 +44,3 @@ A decentralized platform to verify internship, training, or work credentials usi
 
 ---
 
-## 🧑‍💻 Getting Started
-
-### 1️⃣ Clone the Repo
-
-```bash
-git clone https://github.com/sanketk77/work-verification-system.git
-cd work-verification-system
